@@ -1,10 +1,19 @@
 # Ant Design AspNetZero
 
-一套企业级的系统解决方案。
+演示地址 [http://aspnetzero.wangrujian.com](http://aspnetzero.wangrujian.com)  
+
+host账号: 用户名 admin  密码 123qwe
+tenant账号：租户名称 Default 用户名 admin  密码 123qwe
+
+## 简介
+
+一套企业级前后端分离系统解决方案。
 
 服务端基于：[AspNetZero](https://github.com/aspnetzero)
 
 客户端基于：[Ant Design](https://github.com/ant-design/ant-design)
+
+UI样式基于：[antd-admin](https://github.com/zuiidea/antd-admin)
 
 ## 安装
 
