@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   Select,
+  Alert,
 } from 'antd'
 import { config } from '../../../utils'
 import styles from './login.less'
@@ -69,7 +70,11 @@ const login = ({
           </Button>
         </Row>
       </form>
+      <br/>
+      <Alert message="host账号: 用户名 admin 密码 123qw" type="success" />
+      <Alert message="tenant账号：租户名称 Default 用户名 admin 密码 123qwe" type="success" />    
     </div>
+
   )
 }
 
