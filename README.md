@@ -3,6 +3,7 @@
 演示地址 [http://aspnetzero.wangrujian.com](http://aspnetzero.wangrujian.com)  
 
 host账号: 用户名 admin  密码 123qwe
+
 tenant账号：租户名称 Default 用户名 admin  密码 123qwe
 
 ## 简介

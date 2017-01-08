@@ -4,7 +4,7 @@ module.exports = {
   logoSrc: 'https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg',
   logoText: 'Ant Abp',
   needLogin: true,
-  urlDomain: 'http://aspnetzero.wangrujian.com',
-  urlApi: 'http://aspnetzero.wangrujian.com/api/services/app',
-  urlToken: 'http://aspnetzero.wangrujian.com',
+  urlDomain: 'http://s.aspnetzero.wangrujian.com',
+  urlApi: 'http://s.aspnetzero.wangrujian.com/api/services/app',
+  urlToken: 'http://s.aspnetzero.wangrujian.com',
 };
