@@ -1,17 +1,16 @@
-import React, { PropTypes } from 'react'
-import { routerRedux } from 'dva/router'
-import { connect } from 'dva'
-import List from './components/list'
-import Search from './components/search'
-import Modal from './components/modal'
+import React, { PropTypes } from 'react';
+import { routerRedux } from 'dva/router';
+import { connect } from 'dva';
+import List from './components/list';
+import Search from './components/search';
+import Modal from './components/modal';
 
-function Editions({ location, dispatch, editions }) {
+function Editions({ dispatch, editions }) {
   const {
-    loading, list, total, current, pagination, message,
+    loading, list, pagination,
     currentItem, modalVisible, modalType,
-  } = editions
+  } = editions;
 
-  const { keyword } = location.query
 
   const modalProps = {
     item: modalType === 'create' ? {} : currentItem,
@@ -21,14 +20,14 @@ function Editions({ location, dispatch, editions }) {
       dispatch({
         type: 'editions/createOrUpdateEdition',
         payload: data,
-      })
+      });
     },
     onCancel() {
       dispatch({
         type: 'editions/hideModal',
-      })
+      });
     },
-  }
+  };
 
   const listProps = {
     dataSource: list,
@@ -41,13 +40,13 @@ function Editions({ location, dispatch, editions }) {
           page: page.current,
           pageSize: page.pageSize,
         },
-      }))
+      }));
     },
     onDeleteItem(id) {
       dispatch({
         type: 'editions/delete',
         payload: id,
-      })
+      });
     },
     onEditItem(id) {
       dispatch({
@@ -55,10 +54,10 @@ function Editions({ location, dispatch, editions }) {
         payload: {
           id,
         },
-      })
+      });
     },
 
-  }
+  };
 
   const searchProps = {
     onAdd() {
@@ -67,12 +66,12 @@ function Editions({ location, dispatch, editions }) {
         payload: {
           modalType: 'create',
         },
-      })
+      });
     },
-  }
+  };
 
   const ModalGen = () =>
-    <Modal {...modalProps} />
+    <Modal {...modalProps} />;
 
   return (
     <div>
@@ -80,18 +79,17 @@ function Editions({ location, dispatch, editions }) {
       <List {...listProps} />
       <ModalGen />
     </div>
-  )
+  );
 }
 
 Editions.propTypes = {
   editions: PropTypes.object,
-  location: PropTypes.object,
   dispatch: PropTypes.func,
-}
+};
 
 
 function mapStateToProps({ editions }) {
-  return { editions }
+  return { editions };
 }
 
-export default connect(mapStateToProps)(Editions)
+export default connect(mapStateToProps)(Editions);

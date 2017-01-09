@@ -1,5 +1,6 @@
 import fetch from 'dva/fetch';
-import config from './config'
+import config from './config';
+
 const cookie = require('js-cookie');
 
 function parseJSON(response) {
@@ -35,9 +36,9 @@ function get(url, options) {
   const head = {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${cookie.get('access_token')}`,
+      Authorization: `Bearer ${cookie.get('access_token')}`,
     },
-  }
+  };
   return request(config.urlApi + url, { ...head, ...options });
 }
 
@@ -46,7 +47,7 @@ function post(url, options) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${cookie.get('access_token')}`,
+      Authorization: `Bearer ${cookie.get('access_token')}`,
     },
   };
   return request(config.urlApi + url, { ...head, ...options });
@@ -56,4 +57,4 @@ module.exports = {
   request,
   post,
   get,
-}
+};

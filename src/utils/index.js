@@ -1,21 +1,21 @@
-import fetch from './request'
-import namespces from './namespces'
-import urls from './urls'
-import config from './config'
-import consts from './consts'
-import feedback from './feedback'
+import fetch from './request';
+import namespces from './namespces';
+import urls from './urls';
+import config from './config';
+import consts from './consts';
+import feedback from './feedback';
 
-// 连字符转驼峰
-String.prototype.hyphenToHump = function () {
-  return this.replace(/-(\w)/g, function () {
-    return arguments[1].toUpperCase()
-  })
-}
+// // 连字符转驼峰
+// String.prototype.hyphenToHump = function () {
+//   return this.replace(/-(\w)/g, function () {
+//     return arguments[1].toUpperCase();
+//   });
+// };
 
-// 驼峰转连字符
-String.prototype.humpToHyphen = function () {
-  return this.replace(/([A-Z])/g, '-$1').toLowerCase()
-}
+// // 驼峰转连字符
+// String.prototype.humpToHyphen = function () {
+//   return this.replace(/([A-Z])/g, '-$1').toLowerCase();
+// };
 
 module.exports = {
   config,
@@ -24,4 +24,4 @@ module.exports = {
   urls,
   namespces,
   feedback,
-}
+};

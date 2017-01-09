@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Form, Input, InputNumber, Radio, Modal, Checkbox, Switch, Select } from 'antd'
-import { consts } from '../../../../utils'
-const FormItem = Form.Item
+import React, { PropTypes } from 'react';
+import { Form, Input, Modal, Checkbox } from 'antd';
+
+const FormItem = Form.Item;
 
 const formItemLayout = {
   labelCol: {
@@ -10,8 +10,7 @@ const formItemLayout = {
   wrapperCol: {
     span: 14,
   },
-}
-
+};
 
 
 const modal = ({
@@ -27,21 +26,20 @@ const modal = ({
     getFieldDecorator,
     validateFields,
     getFieldsValue,
-    setFieldsValue,
   },
 }) => {
   function handleOk() {
     validateFields((errors) => {
       if (errors) {
-        return
+        return;
       }
-      const vals = { ...getFieldsValue(), id: role.id };//need set id
+      const vals = { ...getFieldsValue(), id: role.id };// need set id
       const data = {
         role: vals,
-        grantedPermissionNames:[]
-      }
-      onOk(data)
-    })
+        grantedPermissionNames: [],
+      };
+      onOk(data);
+    });
   }
   const modalOpts = {
     title: '修改角色',
@@ -49,7 +47,7 @@ const modal = ({
     onOk: handleOk,
     onCancel,
     wrapClassName: 'vertical-center-modal',
-  }
+  };
 
   return (
     <Modal {...modalOpts}>
@@ -73,8 +71,8 @@ const modal = ({
         </FormItem>
       </Form>
     </Modal>
-  )
-}
+  );
+};
 
 modal.propTypes = {
   visible: PropTypes.any,
@@ -82,6 +80,6 @@ modal.propTypes = {
   item: PropTypes.object,
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
-}
+};
 
-export default Form.create()(modal)
+export default Form.create()(modal);

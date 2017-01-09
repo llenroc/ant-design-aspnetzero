@@ -15,4 +15,4 @@ module.exports = {
     dashboard: 'dashboard',
     settings: 'tenant.settings',
   },
-}
+};

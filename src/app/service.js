@@ -1,11 +1,10 @@
-import { config, fetch } from '../utils'
-import qs from 'qs'
-const cookie = require('js-cookie');
+import qs from 'qs';
+import { config, fetch } from '../utils';
 
 export async function login(params) {
   return fetch.post('/account/login', {
     body: qs.stringify(params),
-  })
+  });
 }
 
 export async function token(params) {
@@ -20,17 +19,17 @@ export async function token(params) {
       client_secret: 'app',
       grant_type: 'password',
     }),
-  })
+  });
 }
 
 export async function userInfo(params) {
   return fetch.post('/session/GetCurrentLoginInformations', {
     body: qs.stringify(params),
-  })
+  });
 }
 
 export async function auth() {
   return fetch.post('/session/auth', {
     body: '',
-  })
+  });
 }

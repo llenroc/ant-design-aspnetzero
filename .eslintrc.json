@@ -1,7 +1,11 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "rules": {
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "rules": {
     "generator-star-spacing": [0],
     "consistent-return": [0],
     "react/forbid-prop-types": [0],
@@ -22,11 +26,9 @@
     "no-bitwise": [0],
     "no-cond-assign": [0],
     "import/no-unresolved": [0],
-    "require-yield": [1]
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "require-yield": [1],
+    "max-len":[0],
+    "no-undef":[0],
+    "no-plusplus":[0]
   }
 }

@@ -1,6 +1,7 @@
-import { create, remove, update, query, getRoleForEdit, createOrUpdateRole } from './service'
-import { parse } from 'qs'
-import { feedback, urls } from '../../../utils'
+import { parse } from 'qs';
+import { create, remove, update, query, getRoleForEdit, createOrUpdateRole } from './service';
+import { feedback, urls } from '../../../utils';
+
 export default {
 
   namespace: 'roles',
@@ -21,21 +22,21 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      history.listen(location => {
+      history.listen((location) => {
         if (location.pathname === urls.common.roles) {
           dispatch({
             type: 'query',
             payload: location.query,
-          })
+          });
         }
-      })
+      });
     },
   },
 
   effects: {
     *query({ payload }, { call, put }) {
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(query, parse(payload))
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(query, parse(payload));
       if (data.success) {
         yield put({
           type: 'querySuccess',
@@ -49,12 +50,12 @@ export default {
               current: 0,
             },
           },
-        })
+        });
       }
     },
     *getRoleForEdit({ payload }, { call, put }) {
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(getRoleForEdit, parse(payload))
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(getRoleForEdit, parse(payload));
       if (data.success) {
         yield put({
           type: 'showModal',
@@ -62,33 +63,33 @@ export default {
             modalType: 'update',
             currentItem: data.result,
           },
-        })
+        });
       }
     },
-    *createOrUpdateRole({ payload }, { call, put, dispatch }) {
-      const { data } = yield call(createOrUpdateRole, parse(payload))
+    *createOrUpdateRole({ payload }, { call, put }) {
+      const { data } = yield call(createOrUpdateRole, parse(payload));
       if (data.success) {
         feedback.message.success('保存成功');
-        yield put({ type: 'hideModal' })
-        yield put({ type: 'query' })
+        yield put({ type: 'hideModal' });
+        yield put({ type: 'query' });
       } else {
         feedback.message.error('保存失败');
       }
     },
-    *'delete'({ payload }, { call, put }) {
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(remove, { id: payload })
+    *delete({ payload }, { call, put }) {
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(remove, { id: payload });
       if (data && data.success) {
         feedback.message.success('删除成功');
-        yield put({ type: 'query'})
+        yield put({ type: 'query' });
       } else {
         feedback.message.error('删除失败');
       }
     },
     *create({ payload }, { call, put }) {
-      yield put({ type: 'hideModal' })
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(create, payload)
+      yield put({ type: 'hideModal' });
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(create, payload);
       if (data && data.success) {
         yield put({
           type: 'querySuccess',
@@ -99,15 +100,15 @@ export default {
               current: data.page.current,
             },
           },
-        })
+        });
       }
     },
     *update({ payload }, { select, call, put }) {
-      yield put({ type: 'hideModal' })
-      yield put({ type: 'showLoading' })
-      const id = yield select(({ roles }) => roles.currentItem.id)
-      const newRole = { ...payload, id }
-      const { data } = yield call(update, newRole)
+      yield put({ type: 'hideModal' });
+      yield put({ type: 'showLoading' });
+      const id = yield select(({ roles }) => roles.currentItem.id);
+      const newRole = { ...payload, id };
+      const { data } = yield call(update, newRole);
       if (data && data.success) {
         yield put({
           type: 'querySuccess',
@@ -118,26 +119,26 @@ export default {
               current: data.page.current,
             },
           },
-        })
+        });
       }
     },
   },
   reducers: {
     showLoading(state) {
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     },
     querySuccess(state, action) {
-      return { ...state, ...action.payload, loading: false }
+      return { ...state, ...action.payload, loading: false };
     },
     showModal(state, action) {
-      return { ...state, ...action.payload, modalVisible: true, loading: false }
+      return { ...state, ...action.payload, modalVisible: true, loading: false };
     },
     hideModal(state) {
-      return { ...state, modalVisible: false }
+      return { ...state, modalVisible: false };
     },
     message(state) {
-      return { ...state }
+      return { ...state };
     },
   },
 
-}
+};

@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Form, Input, InputNumber, Radio, Modal, Checkbox, Switch, Select } from 'antd'
-import { consts } from '../../../../utils'
-const FormItem = Form.Item
+import React, { PropTypes } from 'react';
+import { Form, Input, Modal, Switch, Select, Option } from 'antd';
+
+const FormItem = Form.Item;
 
 const formItemLayout = {
   labelCol: {
@@ -10,7 +10,7 @@ const formItemLayout = {
   wrapperCol: {
     span: 14,
   },
-}
+};
 
 
 const modal = ({
@@ -23,17 +23,16 @@ const modal = ({
     getFieldDecorator,
     validateFields,
     getFieldsValue,
-    setFieldsValue,
   },
 }) => {
   function handleOk() {
     validateFields((errors) => {
       if (errors) {
-        return
+        return;
       }
-      const vals = { ...getFieldsValue(), id: item.editionId};
-      onOk(vals)
-    })
+      const vals = { ...getFieldsValue(), id: item.editionId };
+      onOk(vals);
+    });
   }
   const modalOpts = {
     title: item.id ? '修改租户' : '添加租户',
@@ -41,7 +40,7 @@ const modal = ({
     onOk: handleOk,
     onCancel,
     wrapClassName: 'vertical-center-modal',
-  }
+  };
   const children = [];
   for (let i = 0; i < editions.length; i++) {
     children.push(<Option key={editions[i].id}>{editions[i].displayName}</Option>);
@@ -49,7 +48,7 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label="租户编码：" hasFeedback {...formItemLayout}  >
+        <FormItem label="租户编码：" hasFeedback {...formItemLayout} >
           {getFieldDecorator('tenancyName', {
             initialValue: item.tenancyName,
             rules: [
@@ -58,7 +57,7 @@ const modal = ({
                 message: '不能为空',
               },
             ],
-          })(<Input disabled = {item.id > 0} />)}
+          })(<Input disabled={item.id > 0} />)}
         </FormItem>
         <FormItem label="名字：" hasFeedback {...formItemLayout}>
           {getFieldDecorator('name', {
@@ -73,8 +72,8 @@ const modal = ({
         </FormItem>
         <FormItem label="版本：" hasFeedback {...formItemLayout}>
           {getFieldDecorator('editionId', {
-            initialValue: item.editionId ? item.editionId.toString() : undefined
-          })(<Select style={{width: '40%'}} placeholder= "请选择版本">
+            initialValue: item.editionId ? item.editionId.toString() : undefined,
+          })(<Select style={{ width: '40%' }} placeholder="请选择版本">
             {children}
           </Select>)}
         </FormItem>
@@ -86,8 +85,8 @@ const modal = ({
         </FormItem>
       </Form>
     </Modal>
-  )
-}
+  );
+};
 
 modal.propTypes = {
   visible: PropTypes.any,
@@ -95,6 +94,6 @@ modal.propTypes = {
   item: PropTypes.object,
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
-}
+};
 
-export default Form.create()(modal)
+export default Form.create()(modal);

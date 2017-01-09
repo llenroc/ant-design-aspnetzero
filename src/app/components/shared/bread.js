@@ -1,9 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Breadcrumb, Icon } from 'antd'
-import styles from './main.less'
-import { config } from '../../../utils'
+import React from 'react';
+import { Breadcrumb, Icon } from 'antd';
+import styles from './main.less';
 
-const pathSet = []
 // const getPathSet = function (menuArray, parentPath) {
 //   parentPath = parentPath || '/'
 //   menuArray.map(item => {
@@ -19,16 +17,18 @@ const pathSet = []
 // }
 // getPathSet(menu)
 
-function Bread({ location, menu }) {
-  let pathNames = []
-  location.pathname.substr(1).split('/').map((item, key) => {
-    if (key > 0) {
-      pathNames.push((pathNames[key - 1] + '-' + item))
-    } else {
-      pathNames.push(('-' + item))
-    }
-  })
-  //console.log(pathNames);
+function Bread(
+  // { location }
+  ) {
+  // const pathNames = [];
+  // location.pathname.substr(1).split('/').map((item, key) => {
+  //   if (key > 0) {
+  //     pathNames.push((`${pathNames[key - 1]}-${item}`));
+  //   } else {
+  //     pathNames.push((`-${item}`));
+  //   }
+  // });
+  // console.log(pathNames);
   // const breads = pathNames.map((item, key) => {
   //   return (
   //     <Breadcrumb.Item key={key} {...pathNames.length - 1 == key ? '' : { href: '#' + pathSet[item].path }}>
@@ -49,12 +49,10 @@ function Bread({ location, menu }) {
 
       </Breadcrumb>
     </div>
-  )
+  );
 }
 
 Bread.propTypes = {
-  location: PropTypes.object,
-  menu: PropTypes.object,
-}
+};
 
-export default Bread
+export default Bread;

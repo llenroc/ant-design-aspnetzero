@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
-import { Form, Input, Button, Select } from 'antd'
-import styles from './search.less'
+import React, { PropTypes } from 'react';
+import { Form, Input, Button } from 'antd';
+import styles from './search.less';
 
 const search = ({
   keyword,
@@ -13,13 +13,13 @@ const search = ({
   },
 }) => {
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     validateFields((errors) => {
-      if (!!errors) {
-        return
+      if (errors) {
+        return;
       }
-      onSearch(getFieldsValue())
-    })
+      onSearch(getFieldsValue());
+    });
   }
 
   return (
@@ -31,21 +31,21 @@ const search = ({
               initialValue: keyword || '',
             })(<Input />)}
           </Form.Item>
-          <Button type="primary" style={{width: "80px"}} htmlType="submit">搜索</Button>
+          <Button type="primary" style={{ width: '80px' }} htmlType="submit">搜索</Button>
         </Form>
       </div>
       <div className={styles.create}>
-          <Button type="ghost" style={{width: "100px"}} onClick={ onAdd }>添加</Button>
+        <Button type="ghost" style={{ width: '100px' }} onClick={onAdd}>添加</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 search.propTypes = {
   form: PropTypes.object.isRequired,
   onSearch: PropTypes.func,
   onAdd: PropTypes.func,
   keyword: PropTypes.string,
-}
+};
 
-export default Form.create()(search)
+export default Form.create()(search);

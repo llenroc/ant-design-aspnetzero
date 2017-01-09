@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Table, Popconfirm, Pagination, Button, Tag } from 'antd'
-import moment from 'moment'
-import { consts } from './../../../../utils'
+import React, { PropTypes } from 'react';
+import { Table, Popconfirm } from 'antd';
+import moment from 'moment';
+import { consts } from './../../../../utils';
 
 function list({
   loading,
@@ -20,17 +20,17 @@ function list({
       title: '系统',
       dataIndex: 'isStatic',
       key: 'isStatic',
-          render: (text) => <span style={{color: text ? '#35a504' : ''}}> {text ? '是' : '否'}</span>,
+      render: text => <span style={{ color: text ? '#35a504' : '' }}> {text ? '是' : '否'}</span>,
     }, {
       title: '默认',
       dataIndex: 'isDefault',
       key: 'isDefault',
-      render: (text) => <span style={{color: text ? '#35a504' :''}}> {text ? '是' : '否'}</span>,
-    },  {
+      render: text => <span style={{ color: text ? '#35a504' : '' }}> {text ? '是' : '否'}</span>,
+    }, {
       title: '创建时间',
       dataIndex: 'creationTime',
       key: 'creationTime',
-      render: (text) => <span>
+      render: text => <span>
         {moment(text).format('YYYY-MM-DD HH:mm')}
       </span>,
     }, {
@@ -46,11 +46,12 @@ function list({
         </p>
       ),
     },
-  ]
-  
+  ];
+
   return (
     <div>
-      <Table size="small"
+      <Table
+        size="small"
         bordered
         columns={columns}
         dataSource={dataSource}
@@ -60,7 +61,7 @@ function list({
         rowKey={record => record.id}
       />
     </div>
-  )
+  );
 }
 
 list.propTypes = {
@@ -70,6 +71,6 @@ list.propTypes = {
   dataSource: PropTypes.array,
   loading: PropTypes.any,
   pagination: PropTypes.any,
-}
+};
 
-export default list
+export default list;

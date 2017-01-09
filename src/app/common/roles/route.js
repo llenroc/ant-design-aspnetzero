@@ -1,17 +1,16 @@
-import React, {PropTypes} from 'react'
-import {routerRedux} from 'dva/router'
-import {connect} from 'dva'
-import RoleList from './components/list'
-import RoleSearch from './components/search'
-import RoleModal from './components/modal'
+import React, { PropTypes } from 'react';
+import { routerRedux } from 'dva/router';
+import { connect } from 'dva';
+import RoleList from './components/list';
+import RoleSearch from './components/search';
+import RoleModal from './components/modal';
 
-function Roles({location, dispatch, roles}) {
+function Roles({ dispatch, roles }) {
   const {
-    loading, list, total, current, pagination, message,
+    loading, list, pagination,
     currentItem, modalVisible, modalType,
-  } = roles
+  } = roles;
 
-  const {keyword} = location.query
 
   const roleModalProps = {
     item: modalType === 'create' ? {} : currentItem,
@@ -21,14 +20,14 @@ function Roles({location, dispatch, roles}) {
       dispatch({
         type: 'roles/createOrUpdateRole',
         payload: data,
-      })
+      });
     },
     onCancel() {
       dispatch({
         type: 'roles/hideModal',
-      })
+      });
     },
-  }
+  };
 
 
   const roleListProps = {
@@ -42,13 +41,13 @@ function Roles({location, dispatch, roles}) {
           page: page.current,
           pageSize: page.pageSize,
         },
-      }))
+      }));
     },
     onDeleteItem(id) {
       dispatch({
         type: 'roles/delete',
         payload: id,
-      })
+      });
     },
     onEditItem(id) {
       dispatch({
@@ -56,10 +55,10 @@ function Roles({location, dispatch, roles}) {
         payload: {
           id,
         },
-      })
+      });
     },
 
-  }
+  };
 
 
   const roleSearchProps = {
@@ -69,12 +68,12 @@ function Roles({location, dispatch, roles}) {
         payload: {
           modalType: 'create',
         },
-      })
-    }
-  }
+      });
+    },
+  };
 
   const RoleModalGen = () =>
-    <RoleModal {...roleModalProps} />
+    <RoleModal {...roleModalProps} />;
 
   return (
     <div>
@@ -82,17 +81,16 @@ function Roles({location, dispatch, roles}) {
       <RoleList {...roleListProps} />
       <RoleModalGen />
     </div>
-  )
+  );
 }
 Roles.propTypes = {
   roles: PropTypes.object,
-  location: PropTypes.object,
   dispatch: PropTypes.func,
+};
+
+
+function mapStateToProps({ roles }) {
+  return { roles };
 }
 
-
-function mapStateToProps({roles}) {
-  return {roles}
-}
-
-export default connect(mapStateToProps)(Roles)
+export default connect(mapStateToProps)(Roles);

@@ -13,18 +13,18 @@ const app = dva({
 app.use(createLoading());
 
 // 3. Model
-app.model(require('./app/model'))
+app.model(require('./app/model'));
 
 // //model common
-app.model(require('./app/common/users/model'))
-app.model(require('./app/common/roles/model'))
+app.model(require('./app/common/users/model'));
+app.model(require('./app/common/roles/model'));
 
 // //model host
-app.model(require('./app/host/editions/model'))
-app.model(require('./app/host/tenants/model'))
+app.model(require('./app/host/editions/model'));
+app.model(require('./app/host/tenants/model'));
 
 // //model tenant
-app.model(require('./app/tenant/settings/model'))
+app.model(require('./app/tenant/settings/model'));
 
 // 4. Router
 app.router(require('./router'));

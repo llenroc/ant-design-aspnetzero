@@ -1,6 +1,7 @@
-import { remove, query, getEditionForEdit, createOrUpdateEdition } from './service'
-import { parse } from 'qs'
-import { feedback, urls } from '../../../utils'
+import { parse } from 'qs';
+import { remove, query, getEditionForEdit, createOrUpdateEdition } from './service';
+import { feedback, urls } from '../../../utils';
+
 export default {
 
   namespace: 'editions',
@@ -21,21 +22,21 @@ export default {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      history.listen(location => {
+      history.listen((location) => {
         if (location.pathname === urls.host.editions) {
           dispatch({
             type: 'query',
             payload: location.query,
-          })
+          });
         }
-      })
+      });
     },
   },
 
   effects: {
     *query({ payload }, { call, put }) {
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(query, parse(payload))
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(query, parse(payload));
       if (data.success) {
         yield put({
           type: 'querySuccess',
@@ -49,11 +50,11 @@ export default {
               current: 0,
             },
           },
-        })
+        });
       }
     },
     *getEditionForEdit({ payload }, { call, put }) {
-      const { data } = yield call(getEditionForEdit, parse(payload))
+      const { data } = yield call(getEditionForEdit, parse(payload));
       if (data.success) {
         yield put({
           type: 'showModal',
@@ -61,25 +62,25 @@ export default {
             modalType: 'update',
             currentItem: data.result,
           },
-        })
+        });
       }
     },
-    *createOrUpdateEdition({ payload }, { call, put, dispatch }) {
-      const { data } = yield call(createOrUpdateEdition, parse(payload))
+    *createOrUpdateEdition({ payload }, { call, put }) {
+      const { data } = yield call(createOrUpdateEdition, parse(payload));
       if (data.success) {
         feedback.message.success('保存成功');
-        yield put({ type: 'hideModal' })
-        yield put({ type: 'query' })
+        yield put({ type: 'hideModal' });
+        yield put({ type: 'query' });
       } else {
         feedback.message.error('保存失败');
       }
     },
-    *'delete'({ payload }, { call, put }) {
-      yield put({ type: 'showLoading' })
-      const { data } = yield call(remove, { id: payload })
+    *delete({ payload }, { call, put }) {
+      yield put({ type: 'showLoading' });
+      const { data } = yield call(remove, { id: payload });
       if (data && data.success) {
         feedback.message.success('删除成功');
-        yield put({ type: 'query' })
+        yield put({ type: 'query' });
       } else {
         feedback.message.error('删除失败');
       }
@@ -87,17 +88,17 @@ export default {
   },
 
   reducers: {
-    showLoading(state, action) {
-      return { ...state, loading: true }
+    showLoading(state) {
+      return { ...state, loading: true };
     },
     querySuccess(state, action) {
-      return { ...state, ...action.payload, loading: false }
+      return { ...state, ...action.payload, loading: false };
     },
     showModal(state, action) {
-      return { ...state, ...action.payload, modalVisible: true, loading: false }
+      return { ...state, ...action.payload, modalVisible: true, loading: false };
     },
     hideModal(state) {
-      return { ...state, modalVisible: false }
+      return { ...state, modalVisible: false };
     },
   },
-}
+};

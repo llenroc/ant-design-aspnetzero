@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import { Form, Input, InputNumber, Radio, Modal, Checkbox, Switch, Select } from 'antd'
-import { consts } from '../../../../utils'
-const FormItem = Form.Item
+import React, { PropTypes } from 'react';
+import { Form, Input, Modal, Switch, Select, Option } from 'antd';
+import { consts } from '../../../../utils';
+
+const FormItem = Form.Item;
 
 const formItemLayout = {
   labelCol: {
@@ -10,7 +11,7 @@ const formItemLayout = {
   wrapperCol: {
     span: 14,
   },
-}
+};
 
 const modal = ({
   visible,
@@ -24,22 +25,21 @@ const modal = ({
     getFieldDecorator,
     validateFields,
     getFieldsValue,
-    setFieldsValue,
   },
 }) => {
   function handleOk() {
     validateFields((errors) => {
       if (errors) {
-        return
+        return;
       }
-      const vals = { ...getFieldsValue(), id: user.id };//need set id
+      const vals = { ...getFieldsValue(), id: user.id };// need set id
       const data = {
         user: vals,
         assignedRoleNames: vals.assignedRoleNames ? vals.assignedRoleNames : [],
         sendActivationEmail: vals.sendActivationEmail,
-      }
-      onOk(data)
-    })
+      };
+      onOk(data);
+    });
   }
 
   function onChangeSetRandomPassword(checked) {
@@ -52,19 +52,19 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: user.id ? '修改租户' : '添加租户',
+    title: user.id ? '修改用户' : '添加用户',
     visible,
     onOk: handleOk,
     onCancel,
     wrapClassName: 'vertical-center-modal',
-  }
+  };
 
   const children = [];
-  const keys = []
+  const keys = [];
   if (item.roles) {
     for (let i = 0; i < item.roles.length; i++) {
       children.push(<Option key={item.roles[i].roleName}>{item.roles[i].roleDisplayName}</Option>);
-      if (item.roles[i].isAssigned) keys.push(item.roles[i].roleName)
+      if (item.roles[i].isAssigned) keys.push(item.roles[i].roleName);
     }
   }
   return (
@@ -123,12 +123,12 @@ const modal = ({
         <div id="div_password" style={{ display: setRandomPassword ? 'none' : 'block' }} >
           <FormItem label="密码" {...formItemLayout}>
             {getFieldDecorator('password')(
-              <Input placeholder="密码" />
+              <Input placeholder="密码" />,
             )}
           </FormItem>
           <FormItem label="密码确认" {...formItemLayout}>
             {getFieldDecorator('passwordRepeat')(
-              <Input placeholder="密码确认" />
+              <Input placeholder="密码确认" />,
             )}
           </FormItem>
         </div>
@@ -152,17 +152,19 @@ const modal = ({
         </FormItem>
         <FormItem label="角色 " {...formItemLayout}>
           {getFieldDecorator('assignedRoleNames', {
-            initialValue: keys
-          })(<Select multiple
-              style= {{ width: '100%' }}
-              placeholder= "请选择角色">
-              {children}
-            </Select>)}
+            initialValue: keys,
+          })(<Select
+            multiple
+            style={{ width: '100%' }}
+            placeholder="请选择角色"
+          >
+            {children}
+          </Select>)}
         </FormItem>
       </Form>
     </Modal>
-  )
-}
+  );
+};
 
 modal.propTypes = {
   visible: PropTypes.any,
@@ -170,6 +172,6 @@ modal.propTypes = {
   item: PropTypes.object,
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
-}
+};
 
-export default Form.create()(modal)
+export default Form.create()(modal);

@@ -1,17 +1,15 @@
-import React, { PropTypes } from 'react'
-import { routerRedux } from 'dva/router'
-import { connect } from 'dva'
-import List from './components/list'
-import Search from './components/search'
-import Modal from './components/modal'
+import React, { PropTypes } from 'react';
+import { routerRedux } from 'dva/router';
+import { connect } from 'dva';
+import List from './components/list';
+import Search from './components/search';
+import Modal from './components/modal';
 
-function Tenants({ location, dispatch, tenants }) {
+function Tenants({ dispatch, tenants }) {
   const {
-    loading, list, total, current, pagination, message,
+    loading, list, pagination,
     currentItem, modalVisible, modalType, editions,
-  } = tenants
-
-  const { keyword } = location.query
+  } = tenants;
 
   const modalProps = {
     item: modalType === 'create' ? {} : currentItem,
@@ -19,17 +17,17 @@ function Tenants({ location, dispatch, tenants }) {
     type: modalType,
     visible: modalVisible,
     onOk(data) {
-        dispatch({
-          type: `tenants/${modalType}`,
-          payload: data,
-        })
+      dispatch({
+        type: `tenants/${modalType}`,
+        payload: data,
+      });
     },
     onCancel() {
       dispatch({
         type: 'tenants/hideModal',
-      })
+      });
     },
-  }
+  };
 
   const listProps = {
     dataSource: list,
@@ -42,13 +40,13 @@ function Tenants({ location, dispatch, tenants }) {
           page: page.current,
           pageSize: page.pageSize,
         },
-      }))
+      }));
     },
     onDeleteItem(id) {
       dispatch({
         type: 'tenants/delete',
         payload: id,
-      })
+      });
     },
     onEditItem(id) {
       dispatch({
@@ -56,10 +54,10 @@ function Tenants({ location, dispatch, tenants }) {
         payload: {
           id,
         },
-      })
+      });
     },
 
-  }
+  };
 
   const searchProps = {
     onAdd() {
@@ -68,12 +66,12 @@ function Tenants({ location, dispatch, tenants }) {
         payload: {
           modalType: 'create',
         },
-      })
+      });
     },
-  }
+  };
 
   const ModalGen = () =>
-    <Modal {...modalProps} />
+    <Modal {...modalProps} />;
 
   return (
     <div>
@@ -81,18 +79,17 @@ function Tenants({ location, dispatch, tenants }) {
       <List {...listProps} />
       <ModalGen />
     </div>
-  )
+  );
 }
 
 Tenants.propTypes = {
   tenants: PropTypes.object,
-  location: PropTypes.object,
   dispatch: PropTypes.func,
-}
+};
 
 
 function mapStateToProps({ tenants }) {
-  return { tenants }
+  return { tenants };
 }
 
-export default connect(mapStateToProps)(Tenants)
+export default connect(mapStateToProps)(Tenants);

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 
 function Dashboard() {
   return (
@@ -6,11 +6,11 @@ function Dashboard() {
       <h1>Hello.</h1>
       <hr />
     </div>
-  )
+  );
 }
 
 Dashboard.propTypes = {
   location: PropTypes.object,
 };
 
-export default Dashboard
+export default Dashboard;

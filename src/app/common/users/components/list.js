@@ -1,8 +1,7 @@
-import React, { PropTypes } from 'react'
-import { Table, Popconfirm, Pagination, Badge, Tag } from 'antd'
-import moment from 'moment'
-import { consts } from './../../../../utils'
-
+import React, { PropTypes } from 'react';
+import { Table, Popconfirm, Badge } from 'antd';
+import moment from 'moment';
+import { consts } from './../../../../utils';
 
 function list({
   loading,
@@ -34,24 +33,24 @@ function list({
       title: '邮箱地址验证',
       dataIndex: 'isEmailConfirmed',
       key: 'isEmailConfirmed',
-      render: (text) => <span style={{color: text ? '#35a504' : ''}}>{text ? '是' : '否'}</span>,
+      render: text => <span style={{ color: text ? '#35a504' : '' }}>{text ? '是' : '否'}</span>,
     }, {
       title: '激活',
       dataIndex: 'isActive',
       key: 'isActive',
-      render: (text) => <Badge status={text ? 'success' : 'default'} />,
+      render: text => <Badge status={text ? 'success' : 'default'} />,
     }, {
       title: '上次登录时间',
       dataIndex: 'lastLoginTime',
       key: 'lastLoginTime',
-      render: (text) => <span>
+      render: text => <span>
         { text ? moment(text).format('YYYY-MM-DD HH:mm') : '-'}
       </span>,
     }, {
       title: '创建时间',
       dataIndex: 'creationTime',
       key: 'creationTime',
-      render: (text) => <span>
+      render: text => <span>
         {moment(text).format('YYYY-MM-DD HH:mm')}
       </span>,
     }, {
@@ -67,11 +66,12 @@ function list({
         </p>
       ),
     },
-  ]
-  
+  ];
+
   return (
     <div>
-      <Table size="small"
+      <Table
+        size="small"
         bordered
         columns={columns}
         dataSource={dataSource}
@@ -81,7 +81,7 @@ function list({
         rowKey={record => record.id}
       />
     </div>
-  )
+  );
 }
 
 list.propTypes = {
@@ -91,6 +91,6 @@ list.propTypes = {
   dataSource: PropTypes.array,
   loading: PropTypes.any,
   pagination: PropTypes.any,
-}
+};
 
-export default list
+export default list;
