@@ -16,6 +16,20 @@ tenant账号：租户名称 Default 用户名 admin  密码 123qwe
 
 UI样式基于：[antd-admin](https://github.com/zuiidea/antd-admin)
 
+## Features
+
+## To do list
+- [ ] 租户管理（Host）
+- [ ] 版本列表（Host）
+- [ ] 控制台（Host、Tenant）
+- [ ] 管理（Host、Tenant）
+  - [ ] 组织架构管理（Host、Tenant）
+  - [ ] 角色管理（Host、Tenant）
+  - [ ] 用户管理（Host、Tenant）
+  - [ ] 语言列表   （Host、Tenant）
+  - [ ] 审计日志（Host、Tenant）
+  - [ ] 设置  （Host、Tenant）
+
 ## 安装
 
 ```bash
