@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Form, Input, Modal, Switch, Select, Option } from 'antd';
+import { Form, Input, Modal, Switch, Select } from 'antd';
 import { consts } from '../../../../utils';
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 
 const formItemLayout = {

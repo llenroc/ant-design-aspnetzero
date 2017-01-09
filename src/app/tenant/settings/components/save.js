@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Form, Switch, Select, Button, Spin, Option } from 'antd';
+import { Form, Switch, Select, Button, Spin } from 'antd';
 
+const Option = Select.Option;
 const FormItem = Form.Item;
 
 const frmSave = ({

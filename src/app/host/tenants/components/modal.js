@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Form, Input, Modal, Switch, Select, Option } from 'antd';
+import { Form, Input, Modal, Switch, Select } from 'antd';
 
 const FormItem = Form.Item;
-
+const Option = Select.Option;
 const formItemLayout = {
   labelCol: {
     span: 6,
